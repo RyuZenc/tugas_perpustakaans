@@ -13,7 +13,7 @@ class AnggotaController extends Controller
     public function index()
     {
         $data['anggota'] = Anggota::paginate(3);
-        $data['judul'] = "Data dimas";
+        $data['judul'] = "Data Buku";
         return view('anggota_index', $data);
     }
 
@@ -23,6 +23,7 @@ class AnggotaController extends Controller
     public function create()
     {
         $data['list_jk'] = ['Laki-laki', 'perempuan'];
+        $data['list_jurusan'] = ['Teknik informatika', 'Sistem informasi', 'Sistem Komputer'];
         return view('anggota_create', $data);
     }
 
@@ -32,7 +33,7 @@ class AnggotaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nim' => 'required|unique:pasiens,nim',
+            'nim' => 'required|unique:anggotas,nim',
             'nama_anggota' => 'required',
             'jenis_kelamin' => 'required',
             'jurusan' => 'required',
@@ -40,20 +41,20 @@ class AnggotaController extends Controller
 
         ]);
 
-        $pasien = new \App\Models\Anggota();
-        $pasien->nim = $request->nim;
-        $pasien->nama_anggota = $request->nama_anggota;
-        $pasien->jenis_kelamin = $request->jenis_kelamin;
-        $pasien->jurusan = $request->jurusan;
-        $pasien->no_hp = $request->no_hp;
-        $pasien->save();
+        $anggota = new \App\Models\Anggota();
+        $anggota->nim = $request->nim;
+        $anggota->nama_anggota = $request->nama_anggota;
+        $anggota->jenis_kelamin = $request->jenis_kelamin;
+        $anggota->jurusan = $request->jurusan;
+        $anggota->no_hp = $request->no_hp;
+        $anggota->save();
         return back()->with('pesan', 'Data sudah Disimpan');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Anggota $anggota)
+    public function show(string $i)
     {
         //
     }
@@ -61,24 +62,41 @@ class AnggotaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Anggota $anggota)
+    public function edit(string $id)
     {
-        //
+        $data['anggota'] = \App\Models\Anggota::findOrFail($id);
+        $data['list_jk'] = ['Laki-laki', 'Perempuan'];
+        $data['list_jurusan'] = ['Teknik informatika', 'Sistem informasi', 'Sistem Komputer'];
+        return view('anggota_edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Anggota $anggota)
+    public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nim' => 'required|unique:anggotas,nim,' . $id,
+            'nama_anggota' => 'required',
+            'jenis_kelamin' => 'required',
+            'jurusan' => 'required',
+            'no_hp' => 'required',
+        ]);
+        $anggota = \App\Models\Anggota::findOrFail($id);
+        $anggota->nim = $request->nim;
+        $anggota->nama_anggota = $request->nama_anggota;
+        $anggota->jenis_kelamin = $request->jenis_kelamin;
+        $anggota->jurusan = $request->jurusan;
+        $anggota->no_hp = $request->no_hp;
+        $anggota->save();
+
+        return redirect('/anggota')->with('pesan', 'Data sudah Diupdate');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Anggota $anggota)
+    public function destroy(string $id)
     {
-        //
+        $anggota = \App\Models\Anggota::findOrFail($id);
+        $anggota->delete();
+        return back()->with('pesan', 'Data Sudah Dihapus');
     }
 }
