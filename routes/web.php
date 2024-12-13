@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Models\Anggota;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +12,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Models\Administrasi;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AnggotaController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::resource('anggota', AnggotaController::class);
 });

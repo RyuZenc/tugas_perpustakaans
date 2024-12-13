@@ -12,7 +12,9 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        //
+        $data['anggota'] = Anggota::paginate(3);
+        $data['judul'] = "Data dimas";
+        return view('anggota_index', $data);
     }
 
     /**
@@ -20,7 +22,8 @@ class AnggotaController extends Controller
      */
     public function create()
     {
-        //
+        $data['list_jk'] = ['Laki-laki', 'perempuan'];
+        return view('anggota_create', $data);
     }
 
     /**
@@ -28,7 +31,23 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nim' => 'required|unique:pasiens,nim',
+            'nama_anggota' => 'required',
+            'jenis_kelamin' => 'required',
+            'jurusan' => 'required',
+            'no_hp' => 'required',
+
+        ]);
+
+        $pasien = new \App\Models\Anggota();
+        $pasien->nim = $request->nim;
+        $pasien->nama_anggota = $request->nama_anggota;
+        $pasien->jenis_kelamin = $request->jenis_kelamin;
+        $pasien->jurusan = $request->jurusan;
+        $pasien->no_hp = $request->no_hp;
+        $pasien->save();
+        return back()->with('pesan', 'Data sudah Disimpan');
     }
 
     /**
