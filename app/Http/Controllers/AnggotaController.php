@@ -22,8 +22,8 @@ class AnggotaController extends Controller
      */
     public function create()
     {
-        $data['list_jk'] = ['Laki-laki', 'perempuan'];
-        $data['list_jurusan'] = ['Teknik informatika', 'Sistem informasi', 'Sistem Komputer'];
+        $data['list_jk'] = ['Laki-laki', 'Perempuan'];
+        $data['list_jurusan'] = ['Teknik Informatika', 'Sistem Informasi', 'Sistem Komputer'];
         return view('anggota_create', $data);
     }
 
