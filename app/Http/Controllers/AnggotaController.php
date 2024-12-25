@@ -13,7 +13,7 @@ class AnggotaController extends Controller
     public function index()
     {
         $data['anggota'] = Anggota::paginate(3);
-        $data['judul'] = "Data Buku";
+        $data['judul'] = "Data Anggota";
         return view('anggota_index', $data);
     }
 
