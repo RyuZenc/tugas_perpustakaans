@@ -15,7 +15,7 @@
                             <div class="form-group">
                                 <label for="nim">NIM</label>
                                 <input id="nim" class="form-control" type="text" name="nim"
-                                    value="{{ $anggota->nim ?? old('kode_pasien') }}">
+                                    value="{{ $anggota->nim ?? old('anggota') }}">
                                 <span class="text-danger">{{ $errors->first('nim') }}</span>
                             </div>
 

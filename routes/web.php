@@ -13,10 +13,11 @@ use App\Models\Anggota;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-use App\Models\Administrasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\PeminjamanController;
+use App\Models\Peminjaman;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,4 +29,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware('auth')->group(function () {
     Route::resource('anggota', AnggotaController::class);
     Route::resource('buku', BukuController::class);
+    Route::resource('peminjaman', PeminjamanController::class);
 });

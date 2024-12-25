@@ -50,6 +50,11 @@
                                     <li><a class="dropdown-item" href="{{ url('buku', []) }}">Data Buku</a></li>
                                     <li><a class="dropdown-item" href="{{ url('buku/create', []) }}">Tambah Buku</a>
                                     </li>
+                                    <hr class="dropdown-divider">
+                                    <li><a class="dropdown-item" href="{{ url('peminjaman', []) }}">Peminjaman</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('peminjaman/create', []) }}">Tambah
+                                            Peminjaman</a></li>
+
                                 </ul>
                             </li>
                             <div class="dropdown">
@@ -58,8 +63,8 @@
                                     Laporan
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ url('dokter/laporan/cetak', []) }}">Laporan
-                                            Dokter</a></li>
+                                    <li><a class="dropdown-item" href="{{ url('!!!/laporan/cetak', []) }}">Laporan
+                                            !!!!</a></li>
                                     <li><a class="dropdown-item" href="#">Another action</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
@@ -86,7 +91,7 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
-                        @else
+                            @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
