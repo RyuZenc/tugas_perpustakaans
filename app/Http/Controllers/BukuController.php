@@ -17,6 +17,15 @@ class BukuController extends Controller
         return view('buku_index', $data);
     }
 
+    public function cari(Request $request)
+    {
+        $cari = $request->get('search');
+        $data['buku'] = \App\Models\Buku::where('judul_buku', 'like', '%' . $cari . '%')
+            ->orwhere('penulis', 'like', '%' . $cari . '%')->paginate(3);
+        $data['judul'] = 'Data Buku';
+        return view('buku_index', $data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

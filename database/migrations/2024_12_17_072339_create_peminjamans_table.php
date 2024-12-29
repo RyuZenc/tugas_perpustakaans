@@ -19,7 +19,6 @@ return new class extends Migration
         });
     }
 
-    //feri love mila
     //priscar love arika
 
     public function down(): void

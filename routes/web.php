@@ -29,5 +29,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware('auth')->group(function () {
     Route::resource('anggota', AnggotaController::class);
     Route::resource('buku', BukuController::class);
+    Route::get('buku/cari/data', [BukuController::class, 'cari']);
     Route::resource('peminjaman', PeminjamanController::class);
 });
