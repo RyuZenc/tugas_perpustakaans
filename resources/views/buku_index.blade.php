@@ -1,11 +1,27 @@
-@extends('layouts.app')
-@section('content')
+@extends('layouts.niceadmin')
+@section('isinya')
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ $judul }}
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ $judul }}
+                            </div>
+                            <div class="col-md-4">
+
+                            </div>
+                            <div class="col-md-4">
+                                <form class="d-flex" role="search" method="get" action="{{ url('buku/cari/data', []) }}">
+
+                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                                        name="search"> &nbsp;
+
+                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped table-hover">
