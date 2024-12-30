@@ -19,8 +19,6 @@ return new class extends Migration
         });
     }
 
-    //priscar love arika
-
     public function down(): void
     {
         Schema::dropIfExists('peminjamans');
