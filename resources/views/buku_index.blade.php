@@ -34,8 +34,10 @@
                                     <th>Penerbit</th>
                                     <th>Tahun Penerbit</th>
                                     <th>Stok Buku</th>
+                                    <th>Gambar</th>
                                     <th>Created</th>
                                     <th>Aksi</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -48,6 +50,14 @@
                                         <td>{{ $b->penerbit }}</td>
                                         <td>{{ $b->tahun }}</td>
                                         <td>{{ $b->stok }}</td>
+                                        <td>
+                                            @if ($b->gambar_buku)
+                                                <img src="{{ Storage::url($b->gambar_buku) }}" alt="Gambar Buku"
+                                                    style="width: 50px; height: 50px; object-fit: cover;">
+                                            @else
+                                                <span class="text-muted">No Image</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $b->created_at }}</td>
                                         <td>
 

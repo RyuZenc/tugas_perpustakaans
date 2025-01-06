@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('penerbit', 50);
             $table->string('tahun', 4);
             $table->string('stok', 20);
+            $table->string('gambar_buku')->nullable();
             $table->timestamps();
         });
     }

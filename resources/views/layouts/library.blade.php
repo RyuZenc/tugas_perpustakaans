@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Library</title>
+    <title>Perpustakaan Unama</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Custom CSS */
@@ -25,9 +25,8 @@
 </head>
 
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">Book Haven</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Perpustakaan Unama</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -35,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="#">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#about">About</a>
@@ -44,15 +43,27 @@
                     <a class="nav-link" href="#books">Books</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#registration">Register</a>
+                    <a class="nav-link" href="#registration">Registrasi</a>
                 </li>
+                @if (Route::has('login'))
+                    @auth
+                        <li class="nav-item">
+                            <a href="{{ url('/dashboard') }}" class="nav-link btn btn-primary btn-sm">Dashboard</a>
+                        </li>
+                    @else
+                        <li class="nav-item">
+                            <a href="{{ route('login') }}" class="nav-link btn btn-primary btn-sm">Log in</a>
+                        </li>
+                        @if (Route::has('register'))
+                            <li class="nav-item">
+                                <a href="{{ route('register') }}" class="nav-link btn btn-primary btn-sm ml-2">Register</a>
+                            </li>
+                        @endif
+                    @endauth
+                @endif
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" id="search-input" placeholder="Search books..."
-                    aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-button">Search</button>
-            </form>
         </div>
+    </nav>
     </nav>
 
     <section id="about" class="py-5">
@@ -64,7 +75,8 @@
                         reading. Our collection features a diverse range of genres, from classic literature to
                         contemporary fiction, non-fiction, and more. We believe in the power of books to educate,
                         inspire, and entertain.</p>
-                    <p>Become a member today to gain access to our full catalog, participate in book discussions, and
+                    <p>Become a member today to gain access to our full catalog, participate in book discussions,
+                        and
                         attend exclusive events.</p>
                 </div>
             </div>
@@ -151,7 +163,7 @@
 
     <footer class="bg-dark text-white py-3">
         <div class="container text-center">
-            <p>&copy; 2023 Book Haven. All rights reserved.</p>
+            <p>&copy; 2023 ZENC. All rights reserved.</p>
         </div>
     </footer>
 
@@ -159,36 +171,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <script>
-        $(document).ready(function() {
-            $('#search-button').click(function(event) {
-                event.preventDefault(); // Prevent form submission
-                const searchTerm = $('#search-input').val().toLowerCase();
-                $('#book-list').hide(); // Hide the original book list
-                $('#search-results').empty().show(); // Clear and show the results container
-
-                let found = false;
-                $('#book-list .card').each(function() {
-                    const title = $(this).find('.card-title').text().toLowerCase();
-                    const author = $(this).find('.card-text:first').text().toLowerCase();
-                    const description = $(this).find('.card-text').last().text().toLowerCase();
-                    if (title.includes(searchTerm) || author.includes(searchTerm) || description
-                        .includes(searchTerm)) {
-                        // Clone the matching book card and add it to the search results
-                        const clonedCard = $(this).clone();
-                        $('#search-results').append($('<div class="col-lg-4 col-md-6">').append(
-                            clonedCard));
-                        found = true;
-                    }
-                });
-
-                if (!found) {
-                    $('#search-results').html(
-                        '<div class="col-12"><p>No books found matching your search.</p></div>');
-                }
-            });
-        });
-    </script>
 </body>
 
 </html>

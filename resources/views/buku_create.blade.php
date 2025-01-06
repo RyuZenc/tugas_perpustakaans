@@ -8,7 +8,7 @@
                         Tambah Data Buku
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('buku', []) }}" method="POST">
+                        <form action="{{ url('buku', []) }}" method="POST" enctype="multipart/form-data">
 
                             @method('POST')
                             @csrf
@@ -66,6 +66,13 @@
                                 <input id="stok" class="form-control" type="text" name="stok"
                                     value="{{ old('stok') }}">
                                 <span class="text-danger">{{ $errors->first('stok') }}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gambar_buku">Upload Gambar Buku</label>
+                                <input id="gambar_buku" class="form-control" type="file" name="gambar_buku"
+                                    accept="image/*" value={{ old('gambar_buku') }}>
+                                <span class="text-danger">{{ $errors->first('gambar_buku') }}</span>
                             </div>
 
                     </div>

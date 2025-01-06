@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BukuController extends Controller
 {
@@ -47,6 +48,7 @@ class BukuController extends Controller
             'penerbit' => 'required',
             'tahun' => 'required',
             'stok' => 'required',
+            'gambar_buku' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi Gambar
         ]);
 
         $buku = new \App\Models\Buku();
@@ -56,6 +58,11 @@ class BukuController extends Controller
         $buku->penerbit = $request->penerbit;
         $buku->tahun = $request->tahun;
         $buku->stok = $request->stok;
+        if ($request->hasFile('gambar_buku')) {
+            $filePath = $request->file('gambar_buku')->store('public/gambar_buku'); // Save in storage/app/public/gambar_buku
+            $buku->gambar_buku = $filePath; // Save the path to the database
+        }
+
         $buku->save();
         return back()->with('pesan', 'Data sudah Disimpan');
     }
@@ -91,6 +98,7 @@ class BukuController extends Controller
             'penerbit' => 'required',
             'tahun' => 'required',
             'stok' => 'required',
+            'gambar_buku' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $buku = \App\Models\Buku::findOrFail($id);
@@ -100,6 +108,15 @@ class BukuController extends Controller
         $buku->penerbit = $request->penerbit;
         $buku->tahun = $request->tahun;
         $buku->stok = $request->stok;
+        if ($request->hasFile('gambar_buku')) {
+
+            if ($buku->gambar_buku && Storage::exists($buku->gambar_buku)) {
+                Storage::delete($buku->gambar_buku);
+            }
+            $filePath = $request->file('gambar_buku')->store('public/gambar_buku');
+            $buku->gambar_buku = $filePath;
+        }
+
         $buku->save();
 
         return redirect('/buku')->with('pesan', 'Data sudah Diupdate');

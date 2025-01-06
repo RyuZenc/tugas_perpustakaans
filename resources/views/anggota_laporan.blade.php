@@ -9,7 +9,7 @@
 
     <!-- Scripts-->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <a href="{{ url('home', []) }}">
+    <a href="{{ url('dashboard', []) }}">
         <span>Dashboard</span>
     </a>
 </head>

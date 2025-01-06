@@ -46,7 +46,7 @@
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="/home" class="logo d-flex align-items-center">
+            <a href="/dashboard" class="logo d-flex align-items-center">
                 <img src="{{ asset('bebas') }}/assets/img/logo.png" alt="">
                 <!-- <i class="bi bi-book-half"></i> -->
                 <span class="d-none d-lg-block">Perpustakaan Unama</span>
@@ -285,7 +285,7 @@
         <ul class="sidebar-nav" id="sidebar-nav">
 
             <li class="nav-item">
-                <a class="nav-link " href="{{ url('home', []) }}">
+                <a class="nav-link " href="{{ url('dashboard', []) }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -409,9 +409,9 @@
             </li><!-- End Profile Page Nav -->
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="pages-blank.html">
-                    <i class="bi bi-file-earmark"></i>
-                    <span>Blank</span>
+                <a class="nav-link collapsed" href="/">
+                    <i class="bi bi-house-door-fill"></i>
+                    <span>Home</span>
                 </a>
             </li><!-- End Blank Page Nav -->
 
@@ -429,10 +429,9 @@
                 </div>
             @endif
 
-            <h1>Dashboard</h1>
+            <h1 class="breadcrumb-item"><a href="/dashboard">Dashboard</a></h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/home">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">{{ request()->path() }}</li>
                 </ol>
             </nav>
