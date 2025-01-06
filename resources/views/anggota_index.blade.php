@@ -5,7 +5,24 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        {{ $judul }}
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ $judul }}
+                            </div>
+                            <div class="col-md-4">
+
+                            </div>
+                            <div class="col-md-4">
+                                <form class="d-flex" role="search" method="get"
+                                    action="{{ url('anggota/cari/data', []) }}">
+
+                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                                        name="search"> &nbsp;
+
+                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped table-hover">
@@ -36,8 +53,8 @@
                                             <a href="{{ url('anggota/' . $a->id . '/edit', []) }}"
                                                 class="btn btn-primary btn-sm">Edit</a>
 
-                                            <form action="{{ url('anggota/' . $a->id, []) }}" method="post" class="d-inline"
-                                                onsubmit="return confirm('Apakah Dihapus?')">
+                                            <form action="{{ url('anggota/' . $a->id, []) }}" method="post"
+                                                class="d-inline" onsubmit="return confirm('Apakah Dihapus?')">
                                                 @method('delete')
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>

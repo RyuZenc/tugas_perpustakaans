@@ -17,6 +17,15 @@ class AnggotaController extends Controller
         return view('anggota_index', $data);
     }
 
+    public function cari(Request $request)
+    {
+        $cari = $request->get('search');
+        $data['anggota'] = \App\Models\Anggota::where('nim', 'like', '%' . $cari . '%')
+            ->orwhere('nama_anggota', 'like', '%' . $cari . '%')->paginate(3);
+        $data['judul'] = 'Data Anggota';
+        return view('anggota_index', $data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

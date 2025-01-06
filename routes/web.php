@@ -14,6 +14,7 @@ use App\Models\Anggota;
 |
 */
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\PeminjamanController;
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('anggota', AnggotaController::class);
     Route::get('anggota/laporan/cetak', [AnggotaController::class, 'laporan']);
+    Route::get('anggota/cari/data', [AnggotaController::class, 'cari']);
 
     Route::resource('buku', BukuController::class);
     Route::get('buku/laporan/cetak', [BukuController::class, 'laporan']);
@@ -37,4 +39,5 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('peminjaman', PeminjamanController::class);
     Route::get('peminjaman/laporan/cetak', [PeminjamanController::class, 'laporan']);
+    Route::get('peminjaman/cari/data', [PeminjamanController::class, 'cari']);
 });

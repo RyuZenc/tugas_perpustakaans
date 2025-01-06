@@ -17,6 +17,15 @@ class PeminjamanController extends Controller
         return view('peminjaman_index', $data);
     }
 
+    public function cari(Request $request)
+    {
+        $cari = $request->get('search');
+        $data['peminjaman'] = \App\Models\Peminjaman::where('nama_buku', 'like', '%' . $cari . '%')
+            ->orwhere('nama_anggota', 'like', '%' . $cari . '%')->paginate(3);
+        $data['judul'] = 'Data Peminjaman';
+        return view('peminjaman_index', $data);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
