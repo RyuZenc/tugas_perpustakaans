@@ -384,17 +384,17 @@
                 </a>
                 <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ url('anggota/laporan/cetak', []) }}" target="blank">
+                        <a href="{{ url('anggota/laporan/cetak', []) }}">
                             <i class="bi bi-circle"></i><span>Laporan Anggota</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('buku/laporan/cetak', []) }}" target="blank">
+                        <a href="{{ url('buku/laporan/cetak', []) }}">
                             <i class="bi bi-circle"></i><span>Laporan Buku</span>
                         </a>
                     </li>
                     <li>
-                        <a href="login.html">
+                        <a href="{{ url('peminjaman/laporan/cetak', []) }}">
                             <i class="bi bi-circle"></i><span>Laporan Peminjaman</span>
                         </a>
                     </li>

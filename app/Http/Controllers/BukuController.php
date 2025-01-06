@@ -12,7 +12,7 @@ class BukuController extends Controller
      */
     public function index()
     {
-        $data['buku'] = Buku::paginate(3);
+        $data['buku'] = Buku::orderBy('id', 'desc')->paginate(3);
         $data['judul'] = "Data Buku";
         return view('buku_index', $data);
     }
@@ -113,5 +113,12 @@ class BukuController extends Controller
         $buku = \App\Models\Buku::findOrFail($id);
         $buku->delete();
         return back()->with('pesan', 'Data Sudah Dihapus');
+    }
+
+    public function laporan()
+    {
+        $data['buku'] = \App\Models\Buku::all();
+        $data['judul'] = 'Laporan Data Buku';
+        return view('buku_laporan', $data);
     }
 }

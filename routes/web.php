@@ -27,8 +27,14 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware('auth')->group(function () {
+
     Route::resource('anggota', AnggotaController::class);
+    Route::get('anggota/laporan/cetak', [AnggotaController::class, 'laporan']);
+
     Route::resource('buku', BukuController::class);
+    Route::get('buku/laporan/cetak', [BukuController::class, 'laporan']);
     Route::get('buku/cari/data', [BukuController::class, 'cari']);
+
     Route::resource('peminjaman', PeminjamanController::class);
+    Route::get('peminjaman/laporan/cetak', [PeminjamanController::class, 'laporan']);
 });

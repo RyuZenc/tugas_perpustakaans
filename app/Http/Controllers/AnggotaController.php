@@ -12,7 +12,7 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        $data['anggota'] = Anggota::paginate(3);
+        $data['anggota'] = Anggota::orderBy('id', 'desc')->paginate(3);
         $data['judul'] = "Data Anggota";
         return view('anggota_index', $data);
     }
@@ -98,5 +98,12 @@ class AnggotaController extends Controller
         $anggota = \App\Models\Anggota::findOrFail($id);
         $anggota->delete();
         return back()->with('pesan', 'Data Sudah Dihapus');
+    }
+
+    public function laporan()
+    {
+        $data['anggota'] = \App\Models\Anggota::all();
+        $data['judul'] = 'Laporan Data Anggota';
+        return view('anggota_laporan', $data);
     }
 }

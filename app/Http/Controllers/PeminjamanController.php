@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peminjaman;
 use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
@@ -11,7 +12,7 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        $data['peminjaman'] = \App\Models\Peminjaman::paginate(5);
+        $data['peminjaman'] = Peminjaman::orderBy('id', 'desc')->paginate(5);
         $data['judul'] = 'Data Peminjaman';
         return view('peminjaman_index', $data);
     }
@@ -97,5 +98,12 @@ class PeminjamanController extends Controller
         $peminjaman = \App\Models\Peminjaman::findOrFail($id);
         $peminjaman->delete();
         return back()->with('pesan', 'Data Sudah Dihapus');
+    }
+
+    public function laporan()
+    {
+        $data['peminjaman'] = \App\Models\Peminjaman::all();
+        $data['judul'] = 'Laporan Data Peminjaman';
+        return view('peminjaman_laporan', $data);
     }
 }
