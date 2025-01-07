@@ -53,17 +53,14 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                             </form>
-<<<<<<< Updated upstream
-=======
+
                                             <form action="{{ route('peminjaman.kembalikan', $a->id) }}" method="POST"
                                                 class="d-inline" onsubmit="return confirm('Apa anda sudah yakin?');">
                                                 @csrf
                                                 @method('POST')
                                                 <button type="submit" class="btn btn-success btn-sm">Dikembalikan</button>
                                             </form>
->>>>>>> Stashed changes
                                         </td>
-
                                     </tr>
                                 @endforeach
                             </tbody>

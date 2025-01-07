@@ -13,12 +13,13 @@ use App\Models\Anggota;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\AnggotaController;
-use App\Http\Controllers\BukuController;
-use App\Http\Controllers\PeminjamanController;
 use App\Models\Peminjaman;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BukuController;
+use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PengembalianController;
 
 Route::get('/', function () {
     return view('layouts/library');
@@ -45,4 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('peminjaman', PeminjamanController::class);
     Route::get('peminjaman/laporan/cetak', [PeminjamanController::class, 'laporan']);
     Route::get('peminjaman/cari/data', [PeminjamanController::class, 'cari']);
+
+    Route::post('/peminjaman/{id}/kembalikan', [PeminjamanController::class, 'kembalikan'])->name('peminjaman.kembalikan');
+    Route::resource('pengembalian', PengembalianController::class);
+    Route::get('pengembalian/laporan/cetak', [PengembalianController::class, 'laporan']);
 });
