@@ -1,4 +1,4 @@
-@extends('layouts.niceadmin')
+@extends('layouts.dashboard')
 
 @section('isinya')
     <div class="container">

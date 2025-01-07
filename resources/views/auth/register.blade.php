@@ -10,7 +10,7 @@
     <meta content="" name="keywords" />
 
     <link href="{{ asset('bebas') }}/assets/img/favicon.png" rel="icon" />
-    <link href="{{ asset('bebas') }}/assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+    <link href="{{ asset('bebas') }}/assets/img/unama.png" rel="unama-icon" />
 
     <link href="https://fonts.gstatic.com" rel="preconnect" />
     <link
