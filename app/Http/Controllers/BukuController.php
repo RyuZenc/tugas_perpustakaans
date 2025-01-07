@@ -11,11 +11,19 @@ class BukuController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    public function index(Request $request)
     {
         $data['buku'] = Buku::orderBy('id', 'desc')->paginate(3);
         $data['judul'] = "Data Buku";
-        return view('buku_index', $data);
+
+        // Check if the request is coming from the home page
+        if ($request->route()->getName() === 'home') {
+            $bukuTerbaru = Buku::orderBy('created_at', 'desc')->limit(3)->get();
+            return view('layouts.library', compact('bukuTerbaru'));
+        } else {
+            return view('buku_index', $data);
+        }
     }
 
     public function cari(Request $request)

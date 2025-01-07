@@ -26,6 +26,10 @@ Route::get('/', function () {
 
 Auth::routes();
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/', [BukuController::class, 'index'])->name('home');
+Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
