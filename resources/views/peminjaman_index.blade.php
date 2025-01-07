@@ -53,6 +53,12 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                             </form>
+                                            <form action="{{ route('peminjaman.kembalikan', $a->id) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('POST')
+                                                <button type="submit" class="btn btn-primary">Pindahkan</button>
+                                            </form>
                                         </td>
 
                                     </tr>
