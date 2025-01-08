@@ -10,7 +10,7 @@
         /* Custom CSS */
         body {
             padding-top: 56px;
-            /* Adjust for fixed navbar */
+            color: wheat
         }
 
         .book-card {
@@ -23,15 +23,15 @@
         }
 
         .navbar {
-            background-color: rgb(224, 198, 241)
+            background-color: rgb(255, 209, 124);
         }
 
         .navbar-brand {
-            color: #000000;
+            color: white
         }
 
         .my-footer {
-            background-color: rgb(224, 198, 241);
+            background-color: rgb(255, 209, 124);
         }
 
         .my-footer .container {
@@ -39,11 +39,14 @@
         }
 
         .my-body {
-            background-color: rgb(160, 141, 243);
+            background-image: url({{ asset('storage/imaginary/book-wall.jpg') }});
+            background-size: cover;
+            background-repeat: no-repeat;
+
         }
 
         .navbar-dark {
-            border-color: rgb(160, 141, 243);
+            background-color: rgb(255, 209, 124);
         }
 
         .card-img-top-container {
@@ -52,6 +55,7 @@
             align-items: center;
             height: 300px;
             overflow: hidden;
+            background-color: transparent;
         }
 
         .card-img-top {
@@ -59,6 +63,17 @@
             max-height: 125%;
             object-fit: contain;
             border-radius: 10px;
+
+        }
+
+        .card-textile {
+            background-color: #a79c41a2;
+            color: #fff7dc;
+        }
+
+        .book-card {
+            background-color: #fff9d4;
+            border-radius: 40px
         }
     </style>
 </head>
@@ -132,7 +147,7 @@
                                         alt="{{ $buku->judul_buku }}">
                                 @endif
                             </div>
-                            <div class="card-body text-center">
+                            <div class="card-body text-center card-textile">
                                 <h5 class="card-title">{{ $buku->judul_buku }}</h5>
                                 <p class="card-text">{{ $buku->penulis }}</p>
                             </div>
