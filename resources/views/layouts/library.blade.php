@@ -68,7 +68,7 @@
 
         .card-textile {
             background-color: #a79c41a2;
-            color: #fff7dc;
+            color: #3f3f3f;
         }
 
         .book-card {
@@ -125,7 +125,7 @@
                     <p>Welcome to our Library! We are a community-driven library passionate about sharing the joy of
                         reading. Our collection features a diverse range of genres, from classic literature to
                         contemporary fiction, non-fiction, and more. We believe in the power of books to educate,
-                        inspire, and entertain.</p>
+                        inspire, and entertain. Be membership now to join.</p>
                 </div>
             </div>
         </div>
