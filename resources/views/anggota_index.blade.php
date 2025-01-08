@@ -34,6 +34,7 @@
                                     <th>Jenis Kelamin</th>
                                     <th>Jurusan</th>
                                     <th>No hp</th>
+                                    <th>Foto profil</th>
                                     <th>Created</th>
                                     <th>Aksi</th>
                                 </tr>
@@ -47,6 +48,14 @@
                                         <td>{{ $a->jenis_kelamin }}</td>
                                         <td>{{ $a->jurusan }}</td>
                                         <td>{{ $a->no_hp }}</td>
+                                        <td>
+                                            @if ($a->gambar_anggota)
+                                                <img src="{{ Storage::url($a->gambar_anggota) }}" alt="Gambar anggota"
+                                                    style="width: 50px; height: 50px; object-fit: cover;">
+                                            @else
+                                                <span class="text-muted">No Image</span>
+                                            @endif
+                                        </td>
                                         <td>{{ $a->created_at }}</td>
                                         <td>
 

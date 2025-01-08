@@ -8,7 +8,7 @@
                         Edit Data Anggota
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('anggota/' . $anggota->id, []) }}" method="POST">
+                        <form action="{{ url('anggota/' . $anggota->id, []) }}" method="POST" enctype="multipart/form-data">
                             @method('PUT')
                             @csrf
 
@@ -52,6 +52,18 @@
                                 <input id="no_hp" class="form-control" type="text" name="no_hp"
                                     value="{{ $anggota->no_hp ?? old('no_hp') }}">
                                 <span class="text-danger">{{ $errors->first('no_hp') }}</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="gambar_anggota">Foto anggota</label>
+                                @if ($anggota->gambar_anggota)
+                                    <div class="mb-3">
+                                        <img src="{{ Storage::url($anggota->gambar_anggota) }}" alt="Gambar anggota"
+                                            style="width: 100px; height: auto;">
+                                    </div>
+                                @endif
+                                <input id="gambar_anggota" class="form-control" type="file" name="gambar_anggota"
+                                    accept="image/*">
+                                <span class="text-danger">{{ $errors->first('gambar_anggota') }}</span>
                             </div>
 
                     </div>
