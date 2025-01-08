@@ -8,7 +8,7 @@
                         Tambah Data Buku
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('buku', []) }}" method="POST">
+                        <form action="{{ url('buku', []) }}" method="POST" enctype="multipart/form-data">
 
                             @method('POST')
                             @csrf
@@ -17,24 +17,28 @@
                                 <label for="kode_buku">Kode Buku</label>
                                 <input id="kode_buku" class="form-control" type="text" name="kode_buku"
                                     value="{{ old('kode_buku') }}">
+                                <span class="text-danger">{{ $errors->first('kode_buku') }}</span>
                             </div>
 
                             <div class="form-group">
                                 <label for="judul_buku">Judul Buku</label>
                                 <input id="judul_buku" class="form-control" type="text" name="judul_buku"
                                     value="{{ old('judul_buku') }}">
+                                <span class="text-danger">{{ $errors->first('judul_buku') }}</span>
                             </div>
 
                             <div class="form-group">
                                 <label for="penulis">Penulis Buku</label>
                                 <input id="penulis" class="form-control" type="text" name="penulis"
                                     value="{{ old('penulis') }}">
+                                <span class="text-danger">{{ $errors->first('penulis') }}</span>
                             </div>
 
                             <div class="form-group">
                                 <label for="penerbit">Penerbit Buku</label>
                                 <input id="penerbit" class="form-control" type="text" name="penerbit"
                                     value="{{ old('penerbit') }}">
+                                <span class="text-danger">{{ $errors->first('penerbit') }}</span>
                             </div>
 
                             <div class="form-group">
@@ -61,6 +65,14 @@
                                 <label for="stok">Stok</label>
                                 <input id="stok" class="form-control" type="text" name="stok"
                                     value="{{ old('stok') }}">
+                                <span class="text-danger">{{ $errors->first('stok') }}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gambar_buku">Upload Gambar Buku</label>
+                                <input id="gambar_buku" class="form-control" type="file" name="gambar_buku"
+                                    accept="image/*" value={{ old('gambar_buku') }}>
+                                <span class="text-danger">{{ $errors->first('gambar_buku') }}</span>
                             </div>
 
                     </div>

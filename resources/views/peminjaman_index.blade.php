@@ -5,7 +5,24 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        {{ $judul }}
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{ $judul }}
+                            </div>
+                            <div class="col-md-4">
+
+                            </div>
+                            <div class="col-md-4">
+                                <form class="d-flex" role="search" method="get"
+                                    action="{{ url('peminjaman/cari/data', []) }}">
+
+                                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                                        name="search"> &nbsp;
+
+                                    <button class="btn btn-outline-success" type="submit">Search</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body">
                         <table class="table table-bordered table-striped table-hover">
@@ -36,8 +53,14 @@
                                                 @csrf
                                                 <button type="submit" class="btn btn-danger btn-sm">Hapus</button>
                                             </form>
-                                        </td>
 
+                                            <form action="{{ route('peminjaman.kembalikan', $a->id) }}" method="POST"
+                                                class="d-inline" onsubmit="return confirm('Apa anda sudah yakin?');">
+                                                @csrf
+                                                @method('POST')
+                                                <button type="submit" class="btn btn-success btn-sm">Dikembalikan</button>
+                                            </form>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -4,17 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Buku;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BukuController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $data['buku'] = Buku::paginate(3);
+        $data['buku'] = Buku::orderBy('id', 'desc')->paginate(3);
         $data['judul'] = "Data Buku";
-        return view('buku_index', $data);
+
+        // Check if the request is coming from the home page
+        if ($request->route()->getName() === 'home') {
+            $bukuTerbaru = Buku::orderBy('created_at', 'desc')->limit(3)->get();
+            return view('layouts.library', compact('bukuTerbaru'));
+        } else {
+            return view('buku_index', $data);
+        }
     }
 
     public function cari(Request $request)
@@ -47,6 +56,7 @@ class BukuController extends Controller
             'penerbit' => 'required',
             'tahun' => 'required',
             'stok' => 'required',
+            'gambar_buku' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi Gambar
         ]);
 
         $buku = new \App\Models\Buku();
@@ -56,6 +66,11 @@ class BukuController extends Controller
         $buku->penerbit = $request->penerbit;
         $buku->tahun = $request->tahun;
         $buku->stok = $request->stok;
+        if ($request->hasFile('gambar_buku')) {
+            $filePath = $request->file('gambar_buku')->store('public/gambar_buku'); // Save in storage/app/public/gambar_buku
+            $buku->gambar_buku = $filePath; // Save the path to the database
+        }
+
         $buku->save();
         return back()->with('pesan', 'Data sudah Disimpan');
     }
@@ -91,6 +106,7 @@ class BukuController extends Controller
             'penerbit' => 'required',
             'tahun' => 'required',
             'stok' => 'required',
+            'gambar_buku' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $buku = \App\Models\Buku::findOrFail($id);
@@ -100,6 +116,15 @@ class BukuController extends Controller
         $buku->penerbit = $request->penerbit;
         $buku->tahun = $request->tahun;
         $buku->stok = $request->stok;
+        if ($request->hasFile('gambar_buku')) {
+
+            if ($buku->gambar_buku && Storage::exists($buku->gambar_buku)) {
+                Storage::delete($buku->gambar_buku);
+            }
+            $filePath = $request->file('gambar_buku')->store('public/gambar_buku');
+            $buku->gambar_buku = $filePath;
+        }
+
         $buku->save();
 
         return redirect('/buku')->with('pesan', 'Data sudah Diupdate');
@@ -113,5 +138,12 @@ class BukuController extends Controller
         $buku = \App\Models\Buku::findOrFail($id);
         $buku->delete();
         return back()->with('pesan', 'Data Sudah Dihapus');
+    }
+
+    public function laporan()
+    {
+        $data['buku'] = \App\Models\Buku::all();
+        $data['judul'] = 'Laporan Data Buku';
+        return view('buku_laporan', $data);
     }
 }

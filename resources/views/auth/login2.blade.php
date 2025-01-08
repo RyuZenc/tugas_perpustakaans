@@ -10,8 +10,8 @@
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="{{ asset('bebas') }}/assets/img/favicon.png" rel="icon">
-    <link href="{{ asset('bebas') }}/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('bebas') }}/assets/img/unama.png" rel="icon">
+    <link href="{{ asset('bebas') }}/assets/img/unama.png" rel="unama-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -52,8 +52,7 @@
                         <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
                             <div class="d-flex justify-content-center py-4">
-                                <a href="{{ asset('bebas') }}/index.html"
-                                    class="logo d-flex align-items-center w-auto">
+                                <a href="{{ url('/') }}" class="logo d-flex align-items-center w-auto">
                                     <img src="{{ asset('bebas') }}/assets/img/logo.png" alt="">
                                     <span class="d-none d-lg-block">Perpustakaan</span>
                                 </a>
@@ -118,7 +117,7 @@
                                             <button class="btn btn-primary w-100" type="submit">Login</button>
                                         </div>
                                         <div class="col-12">
-                                            <p class="small mb-0">Register? Asked Admin.</p>
+                                            <p class="small mb-0"></p>
                                         </div>
                                     </form>
                                 </div>

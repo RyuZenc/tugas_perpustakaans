@@ -8,7 +8,7 @@
                         Edit Data Buku
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('buku/' . $buku->id, []) }}" method="POST">
+                        <form action="{{ url('buku/' . $buku->id, []) }}" method="POST" enctype="multipart/form-data">
                             @method('PUT')
                             @csrf
 
@@ -66,6 +66,19 @@
                                 <input id="stok" class="form-control" type="text" name="stok"
                                     value="{{ $buku->stok ?? old('stok') }}">
                                 <span class="text-danger">{{ $errors->first('stok') }}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gambar_buku">Gambar Buku</label>
+                                @if ($buku->gambar_buku)
+                                    <div class="mb-3">
+                                        <img src="{{ Storage::url($buku->gambar_buku) }}" alt="Gambar Buku"
+                                            style="width: 100px; height: auto;">
+                                    </div>
+                                @endif
+                                <input id="gambar_buku" class="form-control" type="file" name="gambar_buku"
+                                    accept="image/*">
+                                <span class="text-danger">{{ $errors->first('gambar_buku') }}</span>
                             </div>
                     </div>
                     <div class="card-footer">
