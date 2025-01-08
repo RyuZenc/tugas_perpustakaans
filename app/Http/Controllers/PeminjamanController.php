@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Peminjaman;
+use App\Models\Pengembalian;
 use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
@@ -11,7 +13,16 @@ class PeminjamanController extends Controller
      */
     public function index()
     {
-        $data['peminjaman'] = \App\Models\Peminjaman::paginate(5);
+        $data['peminjaman'] = Peminjaman::orderBy('id', 'desc')->paginate(5);
+        $data['judul'] = 'Data Peminjaman';
+        return view('peminjaman_index', $data);
+    }
+
+    public function cari(Request $request)
+    {
+        $cari = $request->get('search');
+        $data['peminjaman'] = \App\Models\Peminjaman::where('nama_buku', 'like', '%' . $cari . '%')
+            ->orwhere('nama_anggota', 'like', '%' . $cari . '%')->paginate(3);
         $data['judul'] = 'Data Peminjaman';
         return view('peminjaman_index', $data);
     }
@@ -97,5 +108,28 @@ class PeminjamanController extends Controller
         $peminjaman = \App\Models\Peminjaman::findOrFail($id);
         $peminjaman->delete();
         return back()->with('pesan', 'Data Sudah Dihapus');
+    }
+
+    public function laporan()
+    {
+        $data['peminjaman'] = \App\Models\Peminjaman::all();
+        $data['judul'] = 'Laporan Data Peminjaman';
+        return view('peminjaman_laporan', $data);
+    }
+
+    public function kembalikan(Request $request, $id)
+    {
+        $peminjaman = Peminjaman::findOrFail($id);
+
+        Pengembalian::create([
+            'nim' => $peminjaman->nim,
+            'kode_buku' => $peminjaman->kode_buku,
+            'tanggal' => $peminjaman->tanggal,
+            'tanggal_kembali' => now(), // Tanggal saat ini
+        ]);
+
+        $peminjaman->delete();
+
+        return redirect()->back()->with('success', 'Buku berhasil dikembalikan!');
     }
 }
