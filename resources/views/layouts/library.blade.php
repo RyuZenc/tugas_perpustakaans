@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perpustakaan Unama</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Custom CSS */
         body {
             padding-top: 56px;
             color: wheat
@@ -19,7 +19,7 @@
 
         .my-navbar .nav-item {
             margin-right: 20px;
-            /* Adjust spacing as needed */
+
         }
 
         .navbar {
@@ -42,7 +42,6 @@
             background-image: url({{ asset('/image/book-wall.jpg') }});
             background-size: cover;
             background-repeat: no-repeat;
-
         }
 
         .navbar-dark {
@@ -59,11 +58,9 @@
         }
 
         .card-img-top {
-            max-width: 65%;
-            max-height: 125%;
+
             object-fit: contain;
             border-radius: 10px;
-
         }
 
         .card-textile {
@@ -117,20 +114,6 @@
         </div>
     </nav>
 
-    <section id="about" class="py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2 text-center">
-                    <h2>About Our Book Library</h2>
-                    <p>Welcome to our Library! We are a community-driven library passionate about sharing the joy of
-                        reading. Our collection features a diverse range of genres, from classic literature to
-                        contemporary fiction, non-fiction, and more. We believe in the power of books to educate,
-                        inspire, and entertain. Be membership now to join.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section id="books" class="py-5">
         <div class="container">
             <h2 class="text-center mb-4">Our New Book Collection</h2>
@@ -139,13 +122,16 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="card book-card">
                             <div class="card-img-top-container">
-                                @if ($buku->gambar_buku)
-                                    <img src="{{ Storage::url($buku->gambar_buku) }}" class="card-img-top"
-                                        alt="{{ $buku->judul_buku }}">
-                                @else
-                                    <img src="https://via.placeholder.com/300x400?text=Book+Cover" class="card-img-top"
-                                        alt="{{ $buku->judul_buku }}">
-                                @endif
+                                <a href="#" data-toggle="modal" data-target="#imageModal"
+                                    data-img="{{ Storage::url($buku->gambar_buku) }}">
+                                    @if ($buku->gambar_buku)
+                                        <img src="{{ Storage::url($buku->gambar_buku) }}" class="card-img-top"
+                                            alt="{{ $buku->judul_buku }}">
+                                    @else
+                                        <img src="https://via.placeholder.com/300x400?text=Book+Cover"
+                                            class="card-img-top" alt="{{ $buku->judul_buku }}">
+                                    @endif
+                                </a>
                             </div>
                             <div class="card-body text-center card-textile">
                                 <h5 class="card-title">{{ $buku->judul_buku }}</h5>
@@ -158,6 +144,25 @@
         </div>
     </section>
 
+    <div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">
+                        <h5 class="card-title">{{ $buku->judul_buku }}</h5>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="" class="img-fluid" id="modal-image" alt="Book Image">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="my-footer text-white py-3">
         <div class="container text-center">
             <p>Edited with <a href="https://github.com/ryuzenc/tugas_perpustakaans/">❤</a></p>
@@ -167,6 +172,15 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        $('#imageModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var imgSrc = button.data('img')
+            var modal = $(this)
+            modal.find('.modal-body #modal-image').attr('src', imgSrc)
+        });
+    </script>
 
 </body>
 

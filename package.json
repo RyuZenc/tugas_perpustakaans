@@ -13,6 +13,7 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "artisan": "^0.1.2"
+        "artisan": "^0.1.2",
+        "lightbox2": "^2.11.5"
     }
 }

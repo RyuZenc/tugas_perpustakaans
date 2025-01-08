@@ -33,7 +33,7 @@ Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('anggota', AnggotaController::class);
     Route::get('anggota/laporan/cetak', [AnggotaController::class, 'laporan']);
