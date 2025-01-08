@@ -39,7 +39,7 @@
         }
 
         .my-body {
-            background-image: url({{ asset('storage/imaginary/book-wall.jpg') }});
+            background-image: url({{ asset('/image/book-wall.jpg') }});
             background-size: cover;
             background-repeat: no-repeat;
 
