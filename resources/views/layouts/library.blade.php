@@ -114,6 +114,22 @@
         </div>
     </nav>
 
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <h2>About Our Book Library</h2>
+                    <p>Welcome to our Library! We are a community-driven library passionate about sharing the joy of
+                        reading. Our collection features a diverse range of genres, from classic literature to
+                        contemporary fiction, non-fiction, and more. We believe in the power of books to educate,
+                        inspire, and entertain.
+                    <p>Join membership to borrow our books.</p>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="books" class="py-5">
         <div class="container">
             <h2 class="text-center mb-4">Our New Book Collection</h2>
