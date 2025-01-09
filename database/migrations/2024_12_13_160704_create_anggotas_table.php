@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('jenis_kelamin', 20);
             $table->string('jurusan', 20);
             $table->string('no_hp', 20);
+            $table->string('gambar_anggota')->nullable();
             $table->timestamps();
         });
     }

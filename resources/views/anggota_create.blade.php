@@ -8,7 +8,7 @@
                         Tambah Data anggota
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('anggota', []) }}" method="POST">
+                        <form action="{{ url('anggota', []) }}" method="POST" enctype="multipart/form-data">
 
                             @method('POST')
                             @csrf
@@ -58,6 +58,13 @@
                                 <input id="no_hp" class="form-control" type="text" name="no_hp"
                                     value="{{ old('no_hp') }}">
                                 <span class="text-danger">{{ $errors->first('no_hp') }}</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gambar_anggota">Upload foto diri</label>
+                                <input id="gambar_anggota" class="form-control" type="file" name="gambar_anggota"
+                                    accept="image/*" value={{ old('gambar_anggota') }}>
+                                <span class="text-danger">{{ $errors->first('gambar_anggota') }}</span>
                             </div>
 
                     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggota;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AnggotaController extends Controller
 {
@@ -14,6 +15,7 @@ class AnggotaController extends Controller
     {
         $data['anggota'] = Anggota::orderBy('id', 'desc')->paginate(3);
         $data['judul'] = "Data Anggota";
+
         return view('anggota_index', $data);
     }
 
@@ -47,6 +49,7 @@ class AnggotaController extends Controller
             'jenis_kelamin' => 'required',
             'jurusan' => 'required',
             'no_hp' => 'required',
+            'gambar_anggota' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
 
         ]);
 
@@ -56,6 +59,10 @@ class AnggotaController extends Controller
         $anggota->jenis_kelamin = $request->jenis_kelamin;
         $anggota->jurusan = $request->jurusan;
         $anggota->no_hp = $request->no_hp;
+        if ($request->hasFile('gambar_anggota')) {
+            $filePath = $request->file('gambar_anggota')->store('public/gambar_anggota');
+            $anggota->gambar_anggota = $filePath; //
+        }
         $anggota->save();
         return back()->with('pesan', 'Data sudah Disimpan');
     }
@@ -90,6 +97,7 @@ class AnggotaController extends Controller
             'jenis_kelamin' => 'required',
             'jurusan' => 'required',
             'no_hp' => 'required',
+            'gambar_anggota' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         $anggota = \App\Models\Anggota::findOrFail($id);
         $anggota->nim = $request->nim;
@@ -97,6 +105,14 @@ class AnggotaController extends Controller
         $anggota->jenis_kelamin = $request->jenis_kelamin;
         $anggota->jurusan = $request->jurusan;
         $anggota->no_hp = $request->no_hp;
+        if ($request->hasFile('gambar_anggota')) {
+
+            if ($anggota->gambar_anggota && Storage::exists($anggota->gambar_anggota)) {
+                Storage::delete($anggota->gambar_anggota);
+            }
+            $filePath = $request->file('gambar_anggota')->store('public/gambar_anggota');
+            $anggota->gambar_anggota = $filePath;
+        }
         $anggota->save();
 
         return redirect('/anggota')->with('pesan', 'Data sudah Diupdate');
